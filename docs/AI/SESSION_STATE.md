@@ -1,31 +1,49 @@
 # Session State
 
-- **当前 Goal**: 构建轻量级自托管 OAuth 2.0 / OpenID Connect Provider (`easy-oauth-worker`)
-- **当前 Task**: TASK-029 (生产环境部署上线与真实用户全链路端到端在线验证)
+- **当前 Goal**: 构建轻量级自托管 OAuth 2.0 / OpenID Connect Provider (`easy-oidc-provider`)
+- **当前 Task**: TASK-030 (项目全量重命名为 easy-oidc-provider)
 - **当前状态**: COMPLETED
 - **已完成内容**:
-  - 加固了 `src/services/oidc.service.ts` 中的 `env.AUTH_URL` 缺省降级防护；
-  - 完善了 `scripts/deploy-pages.sh` 脚本执行逻辑与部署流（修复变量时序与可见性回显）；
-  - 执行 `bash scripts/deploy-pages.sh --reset-db --seed`，成功将最新纯用户名架构全量发布至 Cloudflare Pages 线上生产环境 (`https://easy-oauth-worker.pages.dev`)，并重置远端 D1 数据库为纯用户名 Clean Schema (`0001_initial_schema.sql`) 及注入种子初始数据；
-  - 编写了针对线上环境的真实用户端到端自动化测试套件 `scripts/live-e2e-test.js`，并在 `package.json` 中配置了 `pnpm run test:live` 命令；
-  - 针对线上真实生产域名全量执行了包含 8 大核心阶段的端到端真实用户模拟测试（覆盖健康检查、用户注册、TOTP 2FA 绑定、二步验证登录、TOTP 密码找回重置、OAuth 2.0 PKCE 客户端全流程、管理控制台治理及无头 Chromium 真实渲染截图），68 个在线断言 100% 成功通过；
-  - 通过无头 Chromium 捕获了线上生产登录界面的高清截图 `docs/screenshots/live_production_login.png` 并验证了界面视觉渲染；
+  - 全量修改工程配置文件：`package.json` 中的 `name` 改为 `easy-oidc-provider`，`wrangler.toml` 中的 `name` 与 `SITE_NAME` 改为 `easy-oidc-provider`；
+  - 同步更新系统核心代码与视图模板：更新 `src/index.ts`（日志与健康检查服务名）、`src/views/layout.tsx`（页脚品牌标语）、`src/views/admin/settings.tsx`（设置页默认站点名降级）、`src/services/oidc.service.ts`（默认 Issuer 域名降级）；
+  - 更新自动化脚本与测试用例：`scripts/deploy-pages.sh`、`scripts/live-e2e-test.js`、`scripts/seed.sql`、`scripts/generate-keys.ts` 及 `test/health.test.ts`；
+  - 更新项目环境变量文件：`.env`、`.env.example`、`.dev.vars`、`.dev.vars.example`；
+  - 全面更新项目核心文档：`README.md`、`AGENTS.md`、`docs/AI/GOAL.md`、`docs/AI/ARCHITECTURE.md`、`docs/AI/DECISIONS.md`、`docs/VISUAL_TEST_REPORT.md` 及 `docs/AI/TASK_INDEX.md`；
+  - 成功执行 `gh repo rename easy-oidc-provider --repo xzsean666/easy-oauth-worker --yes`，将 GitHub 远程仓库更名为 `xzsean666/easy-oidc-provider`；
+  - 更新本地 Git 远程源至 `https://github.com/xzsean666/easy-oidc-provider.git`；
+  - 本地目录更名并配置兼容软链接 `/ssd0/git/easy-oidc-provider`；
   - 运行全量 TypeScript 类型检查及单元/集成测试套件，140 个测试用例全部通过。
 - **修改过的文件**:
+  - `package.json`
+  - `wrangler.toml`
+  - `src/index.ts`
+  - `src/views/layout.tsx`
+  - `src/views/admin/settings.tsx`
   - `src/services/oidc.service.ts`
   - `scripts/deploy-pages.sh`
-  - `package.json`
+  - `scripts/live-e2e-test.js`
+  - `scripts/seed.sql`
+  - `scripts/generate-keys.ts`
+  - `test/health.test.ts`
+  - `.env`
+  - `.env.example`
+  - `.dev.vars`
+  - `.dev.vars.example`
+  - `README.md`
+  - `AGENTS.md`
+  - `docs/AI/GOAL.md`
+  - `docs/AI/ARCHITECTURE.md`
+  - `docs/AI/DECISIONS.md`
+  - `docs/VISUAL_TEST_REPORT.md`
   - `docs/AI/TASK_INDEX.md`
   - `docs/AI/SESSION_STATE.md`
 - **创建过的文件**:
-  - `docs/AI/tasks/TASK-029.md`
-  - `scripts/live-e2e-test.js`
-  - `docs/screenshots/live_production_login.png`
+  - `docs/AI/tasks/TASK-030.md`
 - **删除的文件**: 无
 - **已运行的验证命令及结果**:
   - `pnpm run typecheck`: 0 errors
   - `pnpm test`: 17 test files passed, 140 tests passed, 0 failures
-  - `bash scripts/deploy-pages.sh --reset-db --seed`: Remote D1 clean schema applied, seed executed, Pages Functions deployed successfully
-  - `node scripts/live-e2e-test.js` / `pnpm run test:live`: 68/68 checks passed (100% success across all 8 live testing stages)
+  - `gh repo rename easy-oidc-provider --repo xzsean666/easy-oauth-worker --yes`
+  - `git remote -v`: origin updated to `https://github.com/xzsean666/easy-oidc-provider.git`
 - **未解决问题**: 无
-- **后续任务**: 线上生产环境已全面就绪，所有功能链路及真实用户测试验证全部通过。
+- **后续任务**: 项目已成功更名为 `easy-oidc-provider`，本地目录、远程仓库与代码文档全部就绪。

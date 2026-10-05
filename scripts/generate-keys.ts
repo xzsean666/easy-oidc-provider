@@ -1,5 +1,5 @@
 /**
- * Generates an RS256 CryptoKeyPair in JWK format for easy-oauth-worker.
+ * Generates an RS256 CryptoKeyPair in JWK format for easy-oidc-provider.
  *
  * Usage:
  *   npx tsx scripts/generate-keys.ts

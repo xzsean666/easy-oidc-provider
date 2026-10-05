@@ -1,4 +1,4 @@
--- Seed data for easy-oauth-worker
+-- Seed data for easy-oidc-provider
 -- Default Admin Account:
 -- Username: admin
 -- Password: AdminPassword123!

@@ -32,7 +32,7 @@ export const Layout = ({
             {children}
           </div>
           <div class="text-center text-xs text-slate-500">
-            Powered by <span class="font-semibold text-slate-400">easy-oauth-worker</span>
+            Powered by <span class="font-semibold text-slate-400">easy-oidc-provider</span>
           </div>
         </div>
       </body>

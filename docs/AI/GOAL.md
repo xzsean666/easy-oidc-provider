@@ -1,7 +1,7 @@
-# Project Goal: easy-oauth-worker
+# Project Goal: easy-oidc-provider
 
 ## 1. 愿景与定位
-`easy-oauth-worker` 是一个基于 Cloudflare Workers 的轻量级、自托管 **Authentication + OAuth 2.0 + OpenID Connect Provider**。
+`easy-oidc-provider` 是一个基于 Cloudflare Workers 的轻量级、自托管 **Authentication + OAuth 2.0 + OpenID Connect Provider**。
 
 核心目标：
 > 让开发者可以快速部署自己的身份认证服务器，并让其他 Web / Mobile / Backend 应用通过标准 OAuth 2.0 / OpenID Connect 协议接入。

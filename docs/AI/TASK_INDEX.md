@@ -1,4 +1,4 @@
-# Task Index: easy-oauth-worker
+# Task Index: easy-oidc-provider
 
 | 任务编号 | 任务名称 | 状态 | 依赖 | 说明 |
 | :--- | :--- | :--- | :--- | :--- |
@@ -31,5 +31,6 @@
 | [TASK-027](tasks/TASK-027.md) | 内置纯 TypeScript SVG 二维码生成引擎与 TOTP 安全中心扫码绑定落地 | DONE | TASK-024, TASK-025 | 纯Workers边缘环境离线SVG二维码渲染、安全中心高对比度扫码卡片与全链路测试 |
 | [TASK-028](tasks/TASK-028.md) | 端到端可视化回归测试与全套高清界面截图更新 (含 TOTP 二维码扫码卡片) | DONE | TASK-020, TASK-027 | 基于Chromium CDP刷新全套12张2x Retina高清截图并完成资产与回归验证 |
 | [TASK-029](tasks/TASK-029.md) | 生产环境部署上线与真实用户全链路端到端在线验证 | DONE | TASK-028 | 部署最新纯用户名版本至Cloudflare Pages与D1，并在真实线上环境执行真实用户全链路E2E测试 |
+| [TASK-030](tasks/TASK-030.md) | 项目全量重命名为 easy-oidc-provider | DONE | TASK-029 | 消除误解，全量更名 GitHub 仓库、本地目录、配置代码与项目文档 |
 
 

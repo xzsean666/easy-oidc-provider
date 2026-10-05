@@ -1,6 +1,6 @@
 # Agent Guidelines
 
-本项目严格遵守工程开发代理规范，详情请查阅 [AI_AGENT_PROMPT.md](file:///ssd0/git/easy-oauth-worker/docs/AI_AGENT_PROMPT.md)。
+本项目严格遵守工程开发代理规范，详情请查阅 [AI_AGENT_PROMPT.md](file:///ssd0/git/easy-oidc-provider/docs/AI_AGENT_PROMPT.md)。
 
 ## 事实来源与执行原则
 - 总目标: `docs/AI/GOAL.md`

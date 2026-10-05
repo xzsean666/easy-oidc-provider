@@ -2,7 +2,7 @@
 # ==============================================================================
 # EasyOAuth Cloudflare Pages Automated Deployment Script
 # ==============================================================================
-# This script automates deploying easy-oauth-worker to Cloudflare Pages:
+# This script automates deploying easy-oidc-provider to Cloudflare Pages:
 # 1. Environment pre-flight check (Node, pnpm, Wrangler, Cloudflare Auth)
 # 2. Quality gate verification (TypeScript typecheck & Vitest test suite)
 # 3. D1 database migration & optional seeding
@@ -43,7 +43,7 @@ log_header() {
 }
 
 # Default configuration values (Default: FAST instant deployment)
-PROJECT_NAME="easy-oauth-worker"
+PROJECT_NAME="easy-oidc-provider"
 BRANCH="main"
 DB_NAME="easy-oauth-db"
 DB_ID=""
@@ -72,7 +72,7 @@ Options:
   -m, --migrate              Run remote D1 database migrations before deploy
   -r, --reset-db             Reset remote D1 database (drops legacy tables and applies clean schema)
   --full                     Full verification mode (runs tests, migrations, and interactive checks)
-  -p, --project-name <name>  Cloudflare Pages project name (default: easy-oauth-worker)
+  -p, --project-name <name>  Cloudflare Pages project name (default: easy-oidc-provider)
   -b, --branch <branch>      Production or target git branch (default: main)
   -d, --db-name <name>       Cloudflare D1 database name (default: easy-oauth-db)
   -i, --db-id <uuid>         Cloudflare D1 database UUID (overrides auto-detection)

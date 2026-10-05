@@ -1,8 +1,8 @@
-# easy-oauth-worker
+# easy-oidc-provider
 
 > 🚀 Lightweight, High-Performance, Self-Hosted OAuth 2.0 & OpenID Connect (OIDC) Identity Provider built natively for **Cloudflare Workers** and **Cloudflare D1**.
 
-`easy-oauth-worker` is a production-ready, serverless Identity Provider (IdP) engineered from the ground up to operate within the Cloudflare edge runtime. It provides complete user authentication, OAuth 2.0 PKCE authorization, OpenID Connect discovery and token issuance, administrative control, and native outbound email notifications via Cloudflare TCP Sockets—**with zero heavy third-party framework overhead**.
+`easy-oidc-provider` is a production-ready, serverless Identity Provider (IdP) engineered from the ground up to operate within the Cloudflare edge runtime. It provides complete user authentication, OAuth 2.0 PKCE authorization, OpenID Connect discovery and token issuance, administrative control, and native outbound email notifications via Cloudflare TCP Sockets—**with zero heavy third-party framework overhead**.
 
 ---
 
@@ -59,7 +59,7 @@
                       1. /oauth/authorize (PKCE + Scopes)
                                           v
 +---------------------------------------------------------------------------------+
-|                              easy-oauth-worker                                  |
+|                              easy-oidc-provider                                 |
 |                                                                                 |
 |  +--------------------+   +-----------------------+   +----------------------+  |
 |  |  Auth & UI Views   |   |   OAuth / OIDC Engine |   |     Admin Web & API  |  |
@@ -92,7 +92,7 @@
 ## 📁 Project Structure
 
 ```
-easy-oauth-worker/
+easy-oidc-provider/
 ├── migrations/
 │   └── 0001_initial_schema.sql      # D1 SQLite database schema
 ├── scripts/
@@ -124,8 +124,8 @@ easy-oauth-worker/
 ### 1. Installation
 
 ```bash
-git clone https://github.com/xzsean666/easy-oauth-worker.git
-cd easy-oauth-worker
+git clone https://github.com/xzsean666/easy-oidc-provider.git
+cd easy-oidc-provider
 pnpm install
 ```
 
@@ -134,14 +134,14 @@ pnpm install
 Check `wrangler.toml` for base environment variables:
 
 ```toml
-name = "easy-oauth-worker"
+name = "easy-oidc-provider"
 main = "src/index.ts"
 compatibility_date = "2024-09-23"
 compatibility_flags = ["nodejs_compat"]
 
 [vars]
 AUTH_URL = "http://localhost:8787"
-SITE_NAME = "easy-oauth-worker"
+SITE_NAME = "easy-oidc-provider"
 
 [[d1_databases]]
 binding = "DB"
@@ -199,7 +199,7 @@ pnpm run test:visual
 
 ## 🛡️ Google Authenticator (TOTP) 2FA & Password Recovery (100% Offline & Free)
 
-`easy-oauth-worker` operates on a **Zero-Email, Zero-SMS** architecture. Security and self-service recovery are handled entirely offline via RFC 6238 Time-based One-Time Passwords (TOTP):
+`easy-oidc-provider` operates on a **Zero-Email, Zero-SMS** architecture. Security and self-service recovery are handled entirely offline via RFC 6238 Time-based One-Time Passwords (TOTP):
 
 ### How It Works
 
@@ -218,7 +218,7 @@ pnpm run test:visual
 
 ## ☁️ Production Deployment
 
-`easy-oauth-worker` 同时支持部署到 **Cloudflare Pages** 与 **Cloudflare Workers**。
+`easy-oidc-provider` 同时支持部署到 **Cloudflare Pages** 与 **Cloudflare Workers**。
 
 ### 方式一：部署到 Cloudflare Pages (推荐)
 
@@ -226,7 +226,7 @@ Cloudflare Pages 拥有免费独立的 `.pages.dev` 域名、免费 SSL、全球
 
 #### 1. 一键全自动部署脚本
 
-项目提供了一键自动化部署脚本 [`scripts/deploy-pages.sh`](file:///ssd0/git/easy-oauth-worker/scripts/deploy-pages.sh)，**默认即为秒级极速发布**，直接运行即可发布代码并自动绑定 D1 数据库：
+项目提供了一键自动化部署脚本 [`scripts/deploy-pages.sh`](file:///ssd0/git/easy-oidc-provider/scripts/deploy-pages.sh)，**默认即为秒级极速发布**，直接运行即可发布代码并自动绑定 D1 数据库：
 
 ```bash
 # ⚡ 极速秒级部署 (默认模式，2~3秒发布，自动绑定已有 D1 数据库)
@@ -253,7 +253,7 @@ bash scripts/deploy-pages.sh --reset-db --seed
 | `-m, --migrate` | `false` | 部署前显式执行远程 D1 数据库 Schema 迁移 |
 | `-r, --reset-db` | `false` | **重置远端数据库**：清除旧表并重新应用最新的纯用户名+TOTP纯净Schema |
 | `--full` | `false` | 完整自检模式（执行测试、D1 迁移、交互确认） |
-| `-p, --project-name` | `easy-oauth-worker` | Cloudflare Pages 项目名称 |
+| `-p, --project-name` | `easy-oidc-provider` | Cloudflare Pages 项目名称 |
 | `-b, --branch` | `main` | 绑定的 Git 分支名称 |
 | `-d, --db-name` | `easy-oauth-db` | Cloudflare D1 数据库名称 |
 | `-i, --db-id` | `wrangler.toml` | Cloudflare D1 数据库 UUID（自动绑定至 Pages `DB` 变量） |

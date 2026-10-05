@@ -44,7 +44,7 @@ app.notFound((c) => {
 });
 
 app.onError((err, c) => {
-  console.error('[easy-oauth-worker error]', err);
+  console.error('[easy-oidc-provider error]', err);
   const isApi =
     c.req.path.startsWith('/api/') ||
     c.req.path.startsWith('/oauth/') ||
@@ -63,12 +63,12 @@ app.get('/health', (c) => {
   return c.json({
     status: 'ok',
     timestamp: Date.now(),
-    service: 'easy-oauth-worker',
+    service: 'easy-oidc-provider',
   });
 });
 
 app.get('/', (c) => {
-  return c.text('easy-oauth-worker is running');
+  return c.text('easy-oidc-provider is running');
 });
 
 app.route('/', authRoutes);

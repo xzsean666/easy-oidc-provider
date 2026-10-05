@@ -8,7 +8,7 @@ describe('Health Check Endpoint', () => {
 
     const data = (await res.json()) as { status: string; service: string; timestamp: number };
     expect(data).toHaveProperty('status', 'ok');
-    expect(data).toHaveProperty('service', 'easy-oauth-worker');
+    expect(data).toHaveProperty('service', 'easy-oidc-provider');
     expect(typeof data.timestamp).toBe('number');
   });
 
@@ -16,7 +16,7 @@ describe('Health Check Endpoint', () => {
     const res = await app.request('/');
     expect(res.status).toBe(200);
     const text = await res.text();
-    expect(text).toContain('easy-oauth-worker is running');
+    expect(text).toContain('easy-oidc-provider is running');
   });
 
   it('sets global security headers on responses', async () => {

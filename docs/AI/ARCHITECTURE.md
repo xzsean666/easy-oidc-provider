@@ -1,4 +1,4 @@
-# Architecture Specification: easy-oauth-worker
+# Architecture Specification: easy-oidc-provider
 
 ## 1. 运行时与技术选型
 

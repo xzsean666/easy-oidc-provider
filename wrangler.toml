@@ -1,11 +1,11 @@
-name = "easy-oauth-worker"
+name = "easy-oidc-provider"
 main = "src/index.ts"
 compatibility_date = "2024-09-23"
 compatibility_flags = ["nodejs_compat"]
 
 [vars]
 AUTH_URL = "http://localhost:8787"
-SITE_NAME = "easy-oauth-worker"
+SITE_NAME = "easy-oidc-provider"
 
 [[d1_databases]]
 binding = "DB"

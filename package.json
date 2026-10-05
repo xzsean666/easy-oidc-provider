@@ -1,5 +1,5 @@
 {
-  "name": "easy-oauth-worker",
+  "name": "easy-oidc-provider",
   "version": "0.1.0",
   "private": true,
   "type": "module",

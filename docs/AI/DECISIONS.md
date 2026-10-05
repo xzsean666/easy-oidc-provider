@@ -1,4 +1,4 @@
-# Architecture Decisions: easy-oauth-worker
+# Architecture Decisions: easy-oidc-provider
 
 ## ADR-001: 技术栈选型为 Hono + TypeScript + D1
 - **背景**: 项目需运行在 Cloudflare Workers 边缘计算环境上，具备极小启动延迟和标准 Web API 兼容性。
@@ -12,11 +12,11 @@
 
 ## ADR-003: 强制采用 PKCE (S256)
 - **背景**: 传统 OAuth 2.0 依赖 Client Secret 进行验证，但现代 SPA 和 Native 客户端无法安全保管 Secret。OAuth 2.1 规范要求强制 PKCE。
-- **决定**: easy-oauth-worker 第一版授权码流程默认强制实施 PKCE（`code_challenge_method=S256`）。
+- **决定**: easy-oidc-provider 第一版授权码流程默认强制实施 PKCE（`code_challenge_method=S256`）。
 - **原因**: 彻底杜绝授权码拦截攻击，并对公开客户端和机密客户端提供统一的安全标准。
 
 ## ADR-004: UI 渲染架构采用 Hono JSX 服务端直出 + Tailwind CSS
-- **背景**: easy-oauth-worker 定位为纯粹的身份认证与授权网关，用户交互集中在登录、注册、授权确认和简易管理界面。
+- **背景**: easy-oidc-provider 定位为纯粹的身份认证与授权网关，用户交互集中在登录、注册、授权确认和简易管理界面。
 - **决定**: 采用 Hono JSX 在 Worker 端直接返回 HTML，引入轻量 Tailwind CSS CDN 样式。
 - **原因**: 彻底消除客户端 JS 打包和加载开销，首屏秒开，易于维护与定制，安全攻击面极小。
 

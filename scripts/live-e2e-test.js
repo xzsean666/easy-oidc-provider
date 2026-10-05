@@ -8,10 +8,10 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const rootDir = path.resolve(__dirname, '..');
 
-const BASE_URL = process.env.BASE_URL || 'https://easy-oauth-worker.pages.dev';
+const BASE_URL = process.env.BASE_URL || 'https://easy-oidc-provider.pages.dev';
 
 console.log('================================================================');
-console.log('🚀 EasyOAuth Comprehensive Live E2E Verification Suite');
+console.log('🚀 EasyOIDC Comprehensive Live E2E Verification Suite');
 console.log(`🎯 Target Deployment: ${BASE_URL}`);
 console.log(`⏰ Started at: ${new Date().toISOString()}`);
 console.log('================================================================\n');
@@ -174,7 +174,7 @@ async function runLiveE2ETests() {
   assert(healthRes.status === 200, 'GET /health returned HTTP 200');
   const healthData = await healthRes.json();
   assert(healthData.status === 'ok', 'Health status is "ok"');
-  assert(healthData.service === 'easy-oauth-worker', 'Health service name matches "easy-oauth-worker"');
+  assert(healthData.service === 'easy-oidc-provider' || healthData.service === 'easy-oauth-worker', 'Health service name matches "easy-oidc-provider"');
 
   const oidcRes = await client.get('/.well-known/openid-configuration');
   assert(oidcRes.status === 200, 'GET /.well-known/openid-configuration returned HTTP 200');

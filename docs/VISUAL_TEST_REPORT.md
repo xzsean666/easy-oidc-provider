@@ -1,6 +1,6 @@
-# EasyOAuth 全链路 E2E 视觉测试与 UI/UX 验收报告
+# EasyOIDC 全链路 E2E 视觉测试与 UI/UX 验收报告
 
-本文档记录了 `easy-oauth-worker` 在真实浏览器运行环境（Chromium 152 / 2x Retina 高清渲染）下的端到端可视化测试结果。覆盖了用户认证全流程、管理控制台全景及 OAuth 2.0 / OpenID Connect 核心授权交互，支持桌面端与移动端双分辨率适配。
+本文档记录了 `easy-oidc-provider` 在真实浏览器运行环境（Chromium 152 / 2x Retina 高清渲染）下的端到端可视化测试结果。覆盖了用户认证全流程、管理控制台全景及 OAuth 2.0 / OpenID Connect 核心授权交互，支持桌面端与移动端双分辨率适配。
 
 ---
 
@@ -31,7 +31,7 @@
 - **UI/UX 验收要点**:
   - 采用极简居中卡片架构，`slate-900` 深色背景搭配 `slate-800/80` 毛玻璃半透明卡片与 `slate-700` 细边框。
   - 用户名与密码输入框支持即时聚焦环（Indigo Ring），并提供直观的“忘记密码”与“注册新账号”跳转引导。
-  - 包含全局品牌标识与底层 `easy-oauth-worker` 徽标。
+  - 包含全局品牌标识与底层 `easy-oidc-provider` 徽标。
 
 ---
 

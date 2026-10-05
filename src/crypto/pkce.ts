@@ -21,7 +21,7 @@ export async function generateCodeChallenge(verifier: string): Promise<string> {
 
 /**
  * Verifies a code verifier against a code challenge using the specified method.
- * Only 'S256' is accepted by easy-oauth-worker as per ADR-003.
+ * Only 'S256' is accepted by easy-oidc-provider as per ADR-003.
  */
 export async function verifyCodeChallenge(
   verifier: string,

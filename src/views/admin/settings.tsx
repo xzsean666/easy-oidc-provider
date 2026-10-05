@@ -21,7 +21,7 @@ export const SettingsView = ({
             <div class="space-y-1">
               <span class="text-slate-400">Site Name</span>
               <div class="font-medium text-white bg-slate-950 p-2.5 rounded-lg border border-slate-800">
-                {siteName || 'easy-oauth-worker'}
+                {siteName || 'easy-oidc-provider'}
               </div>
             </div>
 
