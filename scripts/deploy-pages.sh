@@ -331,11 +331,11 @@ else
     DROP_SQL="DROP TABLE IF EXISTS verification_tokens; DROP TABLE IF EXISTS oauth_tokens; DROP TABLE IF EXISTS oauth_authorization_codes; DROP TABLE IF EXISTS oauth_clients; DROP TABLE IF EXISTS sessions; DROP TABLE IF EXISTS users; DROP TABLE IF EXISTS d1_migrations;"
 
     log_info "Dropping legacy tables on remote D1 '${DB_NAME}'..."
-    echo "y" | npx wrangler d1 execute "$DB_NAME" --remote --command="$DROP_SQL" 2>/dev/null || true
+    echo "y" | npx wrangler d1 execute "$DB_NAME" --remote --command="$DROP_SQL" || true
 
     log_info "Applying clean initial schema (migrations/0001_initial_schema.sql) to remote D1..."
-    if echo "y" | npx wrangler d1 execute "$DB_NAME" --remote --file=migrations/0001_initial_schema.sql 2>/dev/null; then
-      echo "y" | npx wrangler d1 execute "$DB_NAME" --remote --command="CREATE TABLE IF NOT EXISTS d1_migrations (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT UNIQUE, applied_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP); INSERT OR IGNORE INTO d1_migrations (name) VALUES ('0001_initial_schema.sql');" 2>/dev/null || true
+    if echo "y" | npx wrangler d1 execute "$DB_NAME" --remote --file=migrations/0001_initial_schema.sql; then
+      echo "y" | npx wrangler d1 execute "$DB_NAME" --remote --command="CREATE TABLE IF NOT EXISTS d1_migrations (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT UNIQUE, applied_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP); INSERT OR IGNORE INTO d1_migrations (name) VALUES ('0001_initial_schema.sql');" || true
       log_success "Remote D1 schema has been completely reset to clean pure username architecture!"
     else
       log_error "Failed to apply clean initial schema to remote D1 '${DB_NAME}'."
@@ -377,14 +377,14 @@ else
   # Step 3c: Seed Data
   if [ "$SEED_DATA" = true ]; then
     log_info "Executing seed.sql to provision initial admin and sample clients on remote D1..."
-    echo "y" | npx wrangler d1 execute "$DB_NAME" --remote --file=scripts/seed.sql 2>/dev/null && \
+    echo "y" | npx wrangler d1 execute "$DB_NAME" --remote --file=scripts/seed.sql && \
       log_success "Remote seed data executed successfully." || \
       log_warn "Seed execution failed or skipped. Please verify remote D1 status."
   elif [ "$NON_INTERACTIVE" = false ]; then
     read -r -p "Would you like to seed initial admin & sample clients to remote D1 now? [y/N] " SEED_CHOICE
     if [[ "$SEED_CHOICE" =~ ^[Yy]$ ]]; then
       log_info "Executing seed.sql..."
-      echo "y" | npx wrangler d1 execute "$DB_NAME" --remote --file=scripts/seed.sql 2>/dev/null && \
+      echo "y" | npx wrangler d1 execute "$DB_NAME" --remote --file=scripts/seed.sql && \
         log_success "Remote seed data executed successfully." || \
         log_warn "Seed execution failed. Please verify remote D1 status."
     fi
@@ -450,6 +450,8 @@ if [ "$NON_INTERACTIVE" = false ]; then
   fi
 fi
 
+DEPLOYED_DOMAIN="${PROJECT_NAME}.pages.dev"
+
 if [ "$SYNC_SECRETS" = true ]; then
   SESSION_SECRET_VAL=$(get_local_secret "SESSION_SECRET")
   OIDC_KEY_VAL=$(get_local_secret "OIDC_SIGNING_KEY")
@@ -462,8 +464,6 @@ fi
 # 6. Build & Deploy to Cloudflare Pages with Automated D1 Binding
 # ------------------------------------------------------------------------------
 log_header "6/6 Deploying to Cloudflare Pages with Automated D1 Binding"
-
-DEPLOYED_DOMAIN="${PROJECT_NAME}.pages.dev"
 
 # Ensure public directory and functions entry exist
 if [ ! -d "$PUBLIC_DIR" ]; then

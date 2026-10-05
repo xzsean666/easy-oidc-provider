@@ -1,36 +1,31 @@
 # Session State
 
 - **当前 Goal**: 构建轻量级自托管 OAuth 2.0 / OpenID Connect Provider (`easy-oauth-worker`)
-- **当前 Task**: TASK-028 (端到端可视化回归测试与全套高清界面截图更新)
+- **当前 Task**: TASK-029 (生产环境部署上线与真实用户全链路端到端在线验证)
 - **当前状态**: COMPLETED
 - **已完成内容**:
-  - 启动了本地 `wrangler dev` 真实服务并执行自动化测试驱动脚本 `scripts/visual-test.js`；
-  - 基于 Chromium 152 无头 CDP 协议与 2x Retina 高清输出，全量重新捕获并更新了全套 12 个视图的高清截图；
-  - 重点验证了 `docs/screenshots/05_account_security_desktop.png`，完美呈现了新落地的白底高对比度 SVG 二维码卡片与身份验证器扫码引导；
-  - 运行 `test/visual-assets.test.ts` 验证资产完备性（3/3 passed）；
-  - 运行全量测试套件（17 个测试文件、140 个测试用例）及 TypeScript 类型检查，100% 成功通过。
+  - 加固了 `src/services/oidc.service.ts` 中的 `env.AUTH_URL` 缺省降级防护；
+  - 完善了 `scripts/deploy-pages.sh` 脚本执行逻辑与部署流（修复变量时序与可见性回显）；
+  - 执行 `bash scripts/deploy-pages.sh --reset-db --seed`，成功将最新纯用户名架构全量发布至 Cloudflare Pages 线上生产环境 (`https://easy-oauth-worker.pages.dev`)，并重置远端 D1 数据库为纯用户名 Clean Schema (`0001_initial_schema.sql`) 及注入种子初始数据；
+  - 编写了针对线上环境的真实用户端到端自动化测试套件 `scripts/live-e2e-test.js`，并在 `package.json` 中配置了 `pnpm run test:live` 命令；
+  - 针对线上真实生产域名全量执行了包含 8 大核心阶段的端到端真实用户模拟测试（覆盖健康检查、用户注册、TOTP 2FA 绑定、二步验证登录、TOTP 密码找回重置、OAuth 2.0 PKCE 客户端全流程、管理控制台治理及无头 Chromium 真实渲染截图），68 个在线断言 100% 成功通过；
+  - 通过无头 Chromium 捕获了线上生产登录界面的高清截图 `docs/screenshots/live_production_login.png` 并验证了界面视觉渲染；
+  - 运行全量 TypeScript 类型检查及单元/集成测试套件，140 个测试用例全部通过。
 - **修改过的文件**:
-  - `docs/screenshots/01_login_desktop.png`
-  - `docs/screenshots/02_login_mobile.png`
-  - `docs/screenshots/03_register_desktop.png`
-  - `docs/screenshots/04_forgot_password_desktop.png`
-  - `docs/screenshots/05_account_security_desktop.png`
-  - `docs/screenshots/06_admin_dashboard_desktop.png`
-  - `docs/screenshots/07_admin_users_desktop.png`
-  - `docs/screenshots/08_admin_clients_desktop.png`
-  - `docs/screenshots/09_admin_settings_desktop.png`
-  - `docs/screenshots/10_oauth_consent_desktop.png`
-  - `docs/screenshots/11_oauth_consent_mobile.png`
-  - `docs/screenshots/12_oauth_error_invalid_redirect.png`
+  - `src/services/oidc.service.ts`
+  - `scripts/deploy-pages.sh`
+  - `package.json`
   - `docs/AI/TASK_INDEX.md`
   - `docs/AI/SESSION_STATE.md`
 - **创建过的文件**:
-  - `docs/AI/tasks/TASK-028.md`
+  - `docs/AI/tasks/TASK-029.md`
+  - `scripts/live-e2e-test.js`
+  - `docs/screenshots/live_production_login.png`
 - **删除的文件**: 无
 - **已运行的验证命令及结果**:
-  - `node scripts/visual-test.js`: All 12 visual screenshots captured successfully
-  - `pnpm test test/visual-assets.test.ts`: 3 passed
   - `pnpm run typecheck`: 0 errors
   - `pnpm test`: 17 test files passed, 140 tests passed, 0 failures
+  - `bash scripts/deploy-pages.sh --reset-db --seed`: Remote D1 clean schema applied, seed executed, Pages Functions deployed successfully
+  - `node scripts/live-e2e-test.js` / `pnpm run test:live`: 68/68 checks passed (100% success across all 8 live testing stages)
 - **未解决问题**: 无
-- **后续任务**: 全套视觉资产已全部刷新更新，已真实体现 TOTP 二维码扫码卡片与最新纯用户名架构界面。
+- **后续任务**: 线上生产环境已全面就绪，所有功能链路及真实用户测试验证全部通过。

@@ -12,7 +12,8 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
-    "test:visual": "node scripts/visual-test.js"
+    "test:visual": "node scripts/visual-test.js",
+    "test:live": "node scripts/live-e2e-test.js"
   },
   "dependencies": {
     "hono": "^4.7.4",

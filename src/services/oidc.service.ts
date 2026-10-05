@@ -134,7 +134,7 @@ export async function generateIdToken(
 ): Promise<string> {
   const keyInfo = await getSigningKey(env);
   const now = Math.floor(Date.now() / 1000);
-  const issuer = env.AUTH_URL.replace(/\/+$/, '');
+  const issuer = (env.AUTH_URL || 'https://easy-oauth-worker.pages.dev').replace(/\/+$/, '');
 
   const claims: StandardClaims = {
     iss: issuer,
